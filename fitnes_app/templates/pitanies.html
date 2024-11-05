@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block title %}Питание и диеты{% endblock %}
+
+
+{% block content %}
+{% if user.is_authenticated %}
+<section class="pit">
+    <div class="container">
+        <h2 class="title-pit">Питание</h2>
+        <div class="pit-list">
+            {% for pitanie in pitanies %}
+            <div class="pit-card">
+                <h3 class="pit-card__name">{{pitanie.pit_card_name}}</h3>
+                <a href="{% url 'pitanie_detail_page' pk=pitanie.pk %}" class="dark-button">Смотреть</a>
+                
+            </div>
+            {% endfor %}
+        </div>     
+</section>
+{% else %}
+<section class="access">
+    <div class="container">
+        <h1 class="title">Вы анонимный пользователь</h1>
+        <p class="dark-text">Чтобы дальше работать с приложением, Вам необходимо пройти регистрацию и авторизацию</p>
+        <div class="access-action">
+            <a href="{% url 'sign_up_page'%}" class="dark-button">Регистрация</a>
+            <a href="{ % url 'login_page' %}" class="dark-button">Вход</a>
+        </div>
+    </div>
+</section>
+{% endif %}
+{% endblock %}

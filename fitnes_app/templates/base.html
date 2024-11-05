@@ -1,0 +1,93 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}{% endblock %}</title>
+    <link rel="stylesheet" href="{% static './css/style.css' %}">
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <button class="menu-button" onclick="kik()">
+                <img src="{% static './images/menu.svg' %}" alt="Menu">
+            </button>
+        </div>
+
+    </header>
+    <div id="menulist" style="display: none;">
+        <div class="container">
+            <ul class="menu-list">
+                <li class="menu-list__item">
+                    <a href="{% url 'home_page' %}" class="menu-list__link"> 
+                        <img src="{% static './images/menu-list/zal.svg' %}" alt="Zal">
+                        <span>Залы</span>
+                    </a>
+                </li>
+                <li class="menu-list__item">
+                    <a href="{% url 'pitanies_page' %}" class="menu-list__link"> 
+                        <img src="{% static './images/menu-list/yoiko.svg' %}" alt="Zal">
+                        <span>Питание и диеты</span>
+                    </a>
+                </li>
+                <li class="menu-list__item">
+                    <a href="{% url 'spectrens_page' %}" class="menu-list__link"> 
+                        <img src="{% static './images/menu-list/special.svg' %}" alt="Zal">
+                        <span>Специальные тренировки</span>
+                    </a>
+                </li>
+                <li class="menu-list__item">
+                    <a href="{% url 'trendoms_page' %}" class="menu-list__link"> 
+                        <img src="{% static './images/menu-list/home.svg' %}" alt="Zal">
+                        <span>Тренеровки дома</span>
+                    </a>
+                </li>
+                <li class="menu-list__item">
+                    <a href="{% url 'abonements_page' %}" class="menu-list__link"> 
+                        <img src="{% static './images/menu-list/abonebent.svg' %}" alt="Zal">
+                        <span>Абонементы</span>
+                    </a>
+                </li>
+                <li class="menu-list__item">
+                    <a href="{% url 'treners_page' %}" class="menu-list__link"> 
+                        <img src="{% static './images/menu-list/trenera.svg' %}" alt="Zal">
+                        <span>Список тренеров</span>
+                    </a>
+                </li>
+                {% if not user.is_authenticated %}
+                <li class="menu-list__item">
+                    <a href="{% url 'login_page' %}" class="menu-list__link"> 
+                        <img src="{% static './images/menu-list/exit.svg' %}" alt="Zal">
+                        <span>Вход</span>
+                    </a>
+                </li>
+                <li class="menu-list__item">
+                    <a href="{% url 'sign_up_page' %}" class="menu-list__link"> 
+                        <img src="{% static './images/menu-list/singUp.svg' %}" alt="Zal">
+                        <span>Регистрация</span>
+                    </a>
+                </li>
+                {% else %}
+                <li class="menu-list__item">
+                    <a href="{% url 'logout_action' %}" class="menu-list__link"> 
+                        <img src="{% static './images/menu-list/exit.svg' %}" alt="Zal">
+                        <span>{{user.username}}: Выход</span>
+                    </a>
+                </li>
+                {% endif %}
+            </ul>
+        </div>
+    </div>
+    <main>
+       {% block content %}
+       {% endblock %}
+    </main>
+
+
+
+
+    <script src="{% static './js/script.js' %}"></script>
+</body>
+</html>

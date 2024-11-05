@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block title %}Список тренеров{% endblock %}
+
+
+{% block content %}
+{% if user.is_authenticated %}
+<section class="tren">
+    <div class="container">
+        <h2 class="title-tren">Тренера</h2>
+        <div class="tren-list">
+            {% for trener in treners %}
+            <div class="tren-card">
+                <div class="tren-card__info">
+                    <img src="{{ trener.foto.url }}" alt="">
+                    <h3 class="tren-card__name">{{trener.first_name}}</h3>
+                    <h3 class="tren-card__title"><strong>Опыт работы:</strong>{{ trener.det_title }}</h3>
+                    <h3 class="tren-cate">{{ trener.specialization }}</h3>
+                    <a href="{% url 'trener_detail_page' pk=trener.pk %}" class="dark-button">Подробнее</a>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% else %}
+<section class="access">
+    <div class="container">
+        <h1 class="title">Вы анонимный пользователь</h1>
+        <p class="dark-text">Чтобы дальше работать с приложением, Вам необходимо пройти регистрацию и авторизацию</p>
+        <div class="access-action">
+            <a href="{% url 'sign_up_page'%}" class="dark-button">Регистрация</a>
+            <a href="{% url 'login_page'%}" class="dark-button">Вход</a>
+        </div>
+    </div>
+</section>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block title %}{{ zal.title }}{% endblock %}
+
+
+{% block content %}
+{% if user.is_authenticated %}
+<section class="club-detail">
+    <div class="container">
+        <h2 class="title">{{ zal.title }}</h2>
+        <h3 class="title">{{ zal.detail_title }}</h3>
+        <p class="club-detail__content">{{zal.description}}</p>
+        <img src="{{ zal.imo.url }}" alt="pfp" class="imoa">
+            <p class="club-detail__content">{{ zal.adress }}</p>
+            <p class="club-detail__cont"><strong>Телефон:</strong>{{zal.telephone}}</p>
+            <p class="club-detail__cont"><strong>Время работы:</strong>{{zal.time}}</p>
+            <strong>Цена абонемента:</strong>
+            <p>{{zal.price}}</p>
+            <br><br/>
+            <a href="{% url 'abonements_page' %}" class="orange-btn">Купить абонемент</a>
+     </div>
+</section>
+{% else %}
+<section class="access">
+    <div class="container">
+        <h1 class="title">Вы анонимный пользователь</h1>
+        <p class="dark-text">Чтобы дальше работать с приложением, Вам необходимо пройти регистрацию и авторизацию</p>
+        <div class="access-action">
+            <a href="{% url 'sign_up_page'%}" class="dark-button">Регистрация</a>
+            <a href="{% url 'login_page'%}" class="dark-button">Вход</a>
+        </div>
+    </div>
+</section>
+{% endif %}
+{% endblock %}

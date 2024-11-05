@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block title %}Тренировки дома{% endblock %}
+
+
+{% block content %}
+{% if user.is_authenticated %}
+<section class="spac">
+    <div class="container">
+       <h2 class="title-spec">Тренировка для вас</h2>
+       <h2 class="level-dom"> УРОВЕНЬ 3</h2>
+       {% for spectren in spectrens %}
+       <div class="dom-card__info">
+            <h3 class="spec-card__title">{{spectren.exercise}} </h3>
+            <h3 class="spac-card__name">{{spectren.times}}</h3>
+            <img src="{{ spectren.image.url }}" alt="" class="spectr">
+       </div>
+       {% endfor %}
+    </div>
+</section>
+{% else %}
+<section class="access">
+    <div class="container">
+        <h1 class="title">Вы анонимный пользователь</h1>
+        <p class="dark-text">Чтобы дальше работать с приложением, Вам необходимо пройти регистрацию и авторизацию</p>
+        <div class="access-action">
+            <a href="{% url 'sign_up_page'%}" class="dark-button">Регистрация</a>
+            <a href="{% url 'login_page'%}" class="dark-button">Вход</a>
+        </div>
+    </div>
+</section>
+{% endif %}
+{% endblock %}

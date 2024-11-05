@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block title %}{{category.name}}{% endblock %}
+
+
+{% block content %}
+<section class="club">
+    <div class="container">
+        <h2 class="title">{{category.name}}</h2>
+        <div class="club-list">
+            <h3 class="club-card__title">Фитнес-клубы для вас (поблизости)</h3>
+            {% for zal in zals %}
+            <div class="club-card">
+                <h3 class="club-card__name">{{ zal.title }}</h3>
+                <img src="{% static './images/stasrnah.svg' %}" alt=""> 
+                <h3 class="club-card__title">{{ zal.detail_title }}</h3>
+                <a href="{% url 'zal_detail_page' pk=zal.pk %}" class="dark-button">Смотреть</a>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endblock %}

@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block title %}Тренировки дома{% endblock %}
+
+
+{% block content %}
+{% if user.is_authenticated %}
+<section class="spac">
+    <div class="container">
+       <h2 class="title-spec">Тренировки дома</h2>
+       <h2 class="level-dom"> УРОВЕНЬ 5</h2>
+       <h2 class="group">Руки и грудь</h2>
+       {% for trendom in trendoms %}
+       <div class="dom-card__info">
+            <h3 class="spec-card__title">{{trendom.exercise}} </h3>
+            <h3 class="spac-card__name">{{trendom.quantity}}</h3>
+            <img src="{{ trendom.image.url }}" alt="">
+       </div>
+       {% endfor %}
+    </div>
+</section>
+{% else %}
+<section class="access">
+    <div class="container">
+        <h1 class="title">Вы анонимный пользователь</h1>
+        <p class="dark-text">Чтобы дальше работать с приложением, Вам необходимо пройти регистрацию и авторизацию</p>
+        <div class="access-action">
+            <a href="{% url 'sign_up_page'%}" class="dark-button">Регистрация</a>
+            <a href="{% url 'login_page'%}" class="dark-button">Вход</a>
+        </div>
+    </div>
+</section>
+{% endif %}
+{% endblock %}

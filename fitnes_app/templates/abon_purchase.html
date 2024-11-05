@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Покупка{% endblock %}
+
+{% block content %}
+{% if user.is_authenticated %}
+<section class="purchase">
+    <div class="container">
+        <h2 class="title">Спасибо за покупку абонемента!</h2>
+        <p class="descriptions">С Вами скоро свяжется наш менеджер!</p>
+    </div>
+</section>
+{% else %}
+<section class="access">
+    <div class="container">
+        <h1 class="title">Вы анонимный пользователь</h1>
+        <p class="dark-text">Чтобы дальше работать с приложением, Вам необходимо пройти регистрацию и авторизацию</p>
+        <div class="access-action">
+            <a href="{% url 'sign_up_page'%}" class="dark-button">Регистрация</a>
+            <a href="{% url 'login_page'%}" class="dark-button">Вход</a>
+        </div>
+    </div>
+</section>
+{% endif %}
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+

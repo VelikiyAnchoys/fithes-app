@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block title %}{{ pitanie.kall_text }}{% endblock %}
+
+
+{% block content %}
+{% if user.is_authenticated %}
+<section class="kall">
+    <div class="container">
+       <h2 class="title-kall">{{pitanie.pit_card_name}}</h2>
+       <div class="kall-card__info">
+           <p class="kal-text">{{pitanie.kall_text}}</p>
+           <p class="kall-description">{{pitanie.kall_description}}</p>
+           
+       </div>
+        <div class="kall-card__info1">
+            <p class="kal-text">{{pitanie.kall_text_one}}</p>
+            <p class="kall-description">{{pitanie.kall_description_one}}</p>
+        </div>
+            <div class="eda">
+                <p>{{pitanie.kall_text_two}}</p>
+                <p>{{pitanie.kall_description_two}}</p>
+            </div>
+        </div>
+    </div>
+</section>
+{% else %}
+<section class="access">
+    <div class="container">
+        <h1 class="title">Вы анонимный пользователь</h1>
+        <p class="dark-text">Чтобы дальше работать с приложением, Вам необходимо пройти регистрацию и авторизацию</p>
+        <div class="access-action">
+            <a href="{% url 'sign_up_page'%}" class="dark-button">Регистрация</a>
+            <a href="{% url 'login_page'%}" class="dark-button">Вход</a>
+        </div>
+    </div>
+</section>
+{% endif %}
+{% endblock %}

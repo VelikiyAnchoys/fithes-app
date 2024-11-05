@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block title %}Актуальное{% endblock %}
+
+
+{% block content %}
+{% if user.is_authenticated %}
+<section class="club">
+    <div class="container">
+        <h2 class="title">Актуальное</h2>
+        <div class="club-list">
+            <h3 class="club-card__title">Фитнес-клубы для вас (поблизости)</h3>
+            {% for zal in zals %}
+            <div class="club-card">
+                <h3 class="club-card__name">{{ zal.title }}</h3>
+                <img src="{% static './images/stasrnah.svg' %}" alt=""> 
+                <h3 class="club-card__title">{{ zal.detail_title }}</h3>
+                <a href="{% url 'zal_detail_page' pk=zal.pk %}" class="dark-button">Смотреть</a>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% else %}
+<section class="access">
+    <div class="container">
+        <h1 class="title">Вы анонимный пользователь</h1>
+        <p class="dark-text">Чтобы дальше работать с приложением, Вам необходимо пройти регистрацию и авторизацию</p>
+        <div class="access-action">
+            <a href="{% url 'sign_up_page'%}" class="dark-button">Регистрация</a>
+            <a href="{% url 'login_page'%}" class="dark-button">Вход</a>
+        </div>
+    </div>
+</section>
+{% endif %}
+{% endblock %}
